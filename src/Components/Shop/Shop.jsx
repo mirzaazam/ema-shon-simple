@@ -4,15 +4,18 @@ import { useEffect } from 'react';
 import Product from '../Product/Product';
 const Shop = () => {
     const [products, setProducts] = useState([]);
-
     useEffect(() => {
         fetch('../../../public/products.json')
-            .then(res => res.json())
-            .then(data => setProducts(data));
+        .then(res => res.json())
+        .then(data => setProducts(data));
     }, []);
+    
+    const [cart, setCart] = useState([]);
+    console.log(cart);
 
-    const productCart = (product) =>{
-        console.log(product);
+     const productCart = (product) =>{
+        let newCart = [...cart, product];
+        setCart(newCart);
     }
 
     return (
@@ -25,6 +28,7 @@ const Shop = () => {
 
             <div>
                 <h2>Order Summary</h2>
+                <p>Selected items: {cart.length}</p>
             </div>
         </div>
     );
